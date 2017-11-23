@@ -1,17 +1,18 @@
 <?php
-	$valore;
 	$messaggio;
     
-	if( isset($_COOKIE["accessi"]))
+	if(isset($_COOKIE["accessi"]) && isset($_COOKIE["data"]))
 	{
+        $data = $_COOKIE["data"];
 		$valore = $_COOKIE["accessi"];
 		$valore += 1;
-		setcookie("accessi", $valore, time()+60*60*24*7, "/", "", 0);
+		setcookie("accessi", $valore, $data+60*60*24*7, "/", "", 0);
         $messaggio = "Numero accessi effettuati al sito: $valore";
 	}
 	else
 	{
 		setcookie("accessi", "1", time()+60*60*24*7, "/", "", 0);
+        setcookie("data", time(), time()+60*60*24*7, "/", "", 0);
 		$messaggio = "E' la prima volta che accedi al sito";
 	}
 ?>
